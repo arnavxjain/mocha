@@ -1,7 +1,14 @@
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { getFirestore } from "firebase/firestore/lite";
+import {
+    getFirestore,
+    query,
+    getDocs,
+    collection,
+    where,
+    addDoc,
+} from "firebase/firestore/lite";
 import { doesUserExist, saveUserByHandler } from "./functions/localhandler";
 
 const firebaseConfig = {
@@ -21,18 +28,52 @@ const storage = getStorage(app);
 //const provider=new GoogleAuthProvider()
 const googleProvider = new GoogleAuthProvider();
 
+const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "April",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+];
+
 export const signInWithGoogle = async () => {
     try {
         const res = await signInWithPopup(auth, googleProvider);
+        let date = `${months[new Date().getMonth()]} ${new Date().getDate()}`;
         const user = {
             fullname: res.user.displayName,
             email: res.user.email,
             photoURL: res.user.photoURL,
             uid: res.user.uid,
+            bio: "",
+            dob: "",
+            joinDate: date,
+            followers: [],
+            following: [],
         };
-        console.log(doesUserExist());
-        saveUserByHandler(user);
-        console.log(doesUserExist());
+
+        const q = query(
+            collection(db, "users"),
+            where("uid", "==", res.user.uid)
+        );
+        const docs = await getDocs(q);
+
+        if (docs.docs.length === 0) {
+            await addDoc(collection(db, "users"), user);
+            saveUserByHandler(user);
+            window.location.pathname = "/home";
+        } else {
+            saveUserByHandler(docs[0]);
+            console.log(docs[0]);
+            window.location.pathname = "/home";
+        }
     } catch (error) {
         console.error(error);
         alert(error.message);

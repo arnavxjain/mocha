@@ -30,6 +30,9 @@ body {
 
     padding-bottom: 22px;
     padding-top: 12px;
+
+    align-self: center;
+    justify-self: center;
 }
 
 .--form-el h2 {

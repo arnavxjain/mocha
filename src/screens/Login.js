@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import login from "../functions/authentication";
 import ThemedButton from "../components/ThemedButton";
 import GoogleButton from "../components/GoogleButton";
+import { doesUserExist } from "../functions/localhandler";
 
 export default function Login() {
     const [authState, setAuthState] = useState(0);
@@ -9,7 +10,12 @@ export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    if (doesUserExist()) {
+        window.location.pathname = "/home";
+    }
+
     return (
+        <div className="login-page">
         <div className="--form-el author">
             {authState === 0 ? (
                 <>
@@ -52,6 +58,7 @@ export default function Login() {
                     </a>
                 </>
             )}
+        </div>
         </div>
     );
 }

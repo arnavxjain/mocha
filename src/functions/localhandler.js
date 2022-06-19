@@ -16,3 +16,8 @@ export const doesUserExist = () => {
     }
     return true;
 };
+
+export const logout = () => {
+    localStorage.setItem("user", null);
+    window.location.pathname = "/login";
+};
