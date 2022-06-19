@@ -68,7 +68,8 @@ body {
     color: #3f8cff !important;
     border: none !important;
     padding: 5px 10px !important;
-    font-weight: 500 !important;
+    font-weight: bold !important;
+    letter-spacing: -0.6px;
     width: 92%;
     height: 36px;
     cursor: pointer;
@@ -93,6 +94,8 @@ body {
     text-decoration: none;
     font-size: 15px;
     transition: 0.15s;
+    font-weight: bold !important;
+    letter-spacing: -0.1px;
     user-select: none;
     cursor: pointer;
 }
@@ -124,4 +127,48 @@ body {
     color: rgba(207, 207, 207, 0.589);
     position: absolute;
     bottom: 2%;
+}
+
+.google_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    width: 90%;
+    padding: 9px 4px;
+    border-radius: 9px;
+    column-gap: 4.6px;
+    margin-top: 7px;
+    transition: 0.16s;
+    cursor: pointer;
+}
+
+.google_button span {
+    font-weight: 500;
+    font-size: 13px;
+}
+
+.google_button:hover {
+    opacity: 0.4;
+    transition: 0.16s;
+}
+
+.login-page {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.bottom-img {
+    width: 40px;
+    position: absolute;
+    bottom: 25px;
+}
+
+.google_button img {
+    width: 17px;
 }

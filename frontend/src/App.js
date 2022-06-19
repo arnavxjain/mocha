@@ -1,21 +1,32 @@
-import { useState } from "react";
-import Login from "./components/Login";
+import React, { useEffect, useState } from "react";
+import Login from "./screens/Login";
 import darkIcon from "./assets/mocha_icon.svg";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import GoogleButton from "./components/GoogleButton";
+import Home from "./screens/Home";
 
 function App() {
-    const [auth, setAuth] = useState("out");
+    // const [auth, setAuth] = useState("out");
+    const [user, setUser] = useState("m");
 
     return (
         <div className="App">
-            {auth === "out" ? (
-                <div className="-login-page">
-                    <img src={darkIcon} alt="" className="form-icon" />
-                    <Login />
-                    <div className="help">Mocha 2022</div>
-                </div>
-            ) : (
-                <h1>mocha!</h1>
-            )}
+            {
+                user == null ? (
+                    <div className="login-page">
+                        <Login />
+                        <img src={darkIcon} className="bottom-img"/>
+                    </div>
+                ) : (
+                    <div className="app-data">
+                        <Router>
+                            <Routes>
+                                <Route path="/home" element={<Home />}/>
+                            </Routes>
+                        </Router>
+                    </div>
+                )
+            }
         </div>
     );
 }
