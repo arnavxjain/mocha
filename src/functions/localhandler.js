@@ -1,7 +1,7 @@
 // get user from localstorage and return as json
 export const getUserFromHandler = () => {
-    let res = JSON.parse(localStorage.getItem("user"));
-    return res;
+    // let res = JSON.parse(localStorage.getItem("user"));
+    // return res;
 };
 
 // save user to localstorage

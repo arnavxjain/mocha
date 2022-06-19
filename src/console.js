@@ -1,6 +1,13 @@
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+
+import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup,
+    createUserWithEmailAndPassword,
+} from "firebase/auth";
+
 import {
     getFirestore,
     query,
@@ -77,6 +84,31 @@ export const signInWithGoogle = async () => {
     } catch (error) {
         console.error(error);
         alert(error.message);
+    }
+};
+
+export const signInWithEP = async (data) => {
+    try {
+        const res = await createUserWithEmailAndPassword(
+            data.email,
+            data.password
+        );
+
+        // const user = {
+        //     fullname: res.user.displayName,
+        //     email: res.user.email,
+        //     photoURL: res.user.photoURL,
+        //     uid: res.user.uid,
+        //     bio: "",
+        //     dob: "",
+        //     joinDate: date,
+        //     followers: [],
+        //     following: [],
+        // };
+
+        // await addDoc(collection(db, "users"), user);
+    } catch (error) {
+        console.error(error);
     }
 };
 

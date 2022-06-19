@@ -19,7 +19,7 @@ body {
     /* border: 1px solid #eaeaea; */
     box-sizing: border-box;
     box-shadow: 0px 4px 64px 3px rgba(0, 0, 0, 0.07);
-    border-radius: 21px;
+    border-radius: 12px;
     width: fit-content;
     padding: 5px 10px;
     width: 340px;
@@ -41,7 +41,9 @@ body {
     margin: 12px 0px;
 }
 
-.--form-el input {
+.--form-el input[type="text"],
+.--form-el input[type="email"],
+.--form-el input[type="password"] {
     width: 90%;
     background: #f9f9f9;
     border-radius: 10px;
@@ -97,10 +99,12 @@ body {
     text-decoration: none;
     font-size: 15px;
     transition: 0.15s;
-    font-weight: bold !important;
+    /* font-weight: bold !important; */
     letter-spacing: -0.1px;
     user-select: none;
     cursor: pointer;
+    background-color: transparent;
+    border: none;
 }
 
 .typical-link:hover {
@@ -110,7 +114,7 @@ body {
 
 .author {
     transition: max-height 0.3s ease-out;
-    max-height: 400px !important;
+    /* max-height: 400px !important; */
 }
 
 .creator {
@@ -174,4 +178,43 @@ body {
 
 .google_button img {
     width: 17px;
+}
+
+.upload-btn {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    justify-content: start !important;
+    width: 90%;
+}
+
+::-webkit-file-upload-button {
+    background-color: #3f8cff46 !important;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 8px;
+    color: #3f8cff;
+    cursor: pointer;
+}
+
+::-webkit-file-upload-button:hover {
+    opacity: 0.4;
+}
+
+.select-image {
+    margin: 12px 0px;
+    margin-top: 8px !important;
+}
+
+::-webkit-file-upload-button::placeholder {
+    color: red !important;
+}
+
+.file-btn {
+    margin-bottom: 10px;
+    border-radius: 10000px;
+    border: none;
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
 }
