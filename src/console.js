@@ -1,6 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 
+import { v4 as uuidv4 } from "uuid";
+
 import {
     getAuth,
     GoogleAuthProvider,
@@ -16,7 +18,7 @@ import {
     where,
     addDoc,
 } from "firebase/firestore/lite";
-import { doesUserExist, saveUserByHandler } from "./functions/localhandler";
+import { saveUserByHandler } from "./functions/localhandler";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAcMKb5jGXN5LwxYEMKCr1jnUunTDxvJec",
@@ -89,24 +91,52 @@ export const signInWithGoogle = async () => {
 
 export const signInWithEP = async (data) => {
     try {
+        const res = await signInWithEP(data.email, data.password);
+        console.log(res);
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export const registerWithEP = async (data) => {
+    try {
         const res = await createUserWithEmailAndPassword(
+            auth,
             data.email,
             data.password
         );
 
-        // const user = {
-        //     fullname: res.user.displayName,
-        //     email: res.user.email,
-        //     photoURL: res.user.photoURL,
-        //     uid: res.user.uid,
-        //     bio: "",
-        //     dob: "",
-        //     joinDate: date,
-        //     followers: [],
-        //     following: [],
-        // };
+        let date = `${months[new Date().getMonth()]} ${new Date().getDate()}`;
+        const user = {
+            fullname: data.fullName,
+            email: data.email,
+            photoURL: "https://picsum.photos/200",
+            uid: uuidv4(),
+            bio: "",
+            dob: "",
+            joinDate: date,
+            followers: [],
+            following: [],
+        };
 
-        // await addDoc(collection(db, "users"), user);
+        const q = query(
+            collection(db, "users"),
+            where("uid", "==", res.user.uid)
+        );
+        const docs = await getDocs(q);
+
+        if (docs.docs.length === 0) {
+            await addDoc(collection(db, "users"), user);
+            saveUserByHandler(user);
+            auth.setPersistence(
+                data.checked
+                    ? auth.Auth.Persistence.LOCAL
+                    : auth.Auth.Persistence.SESSION
+            );
+            window.location.pathname = "/home";
+        } else {
+            console.log("account already exists!");
+        }
     } catch (error) {
         console.error(error);
     }

@@ -1,7 +1,10 @@
 // get user from localstorage and return as json
 export const getUserFromHandler = () => {
-    // let res = JSON.parse(localStorage.getItem("user"));
-    // return res;
+    let toBeParsed = window.localStorage.getItem("user");
+    if (toBeParsed !== "undefined") {
+        let res = JSON.parse(toBeParsed);
+        return res;
+    }
 };
 
 // save user to localstorage

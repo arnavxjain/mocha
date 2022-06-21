@@ -4,13 +4,16 @@ import { logout } from "../functions/localhandler";
 function Header() {
     return (
         <div className="header">
-            <h1>mocha</h1>
+            <a href="/home"><h1>mocha</h1></a>
             <input
                 type="text"
                 placeholder="Search for people around the globe"
             />
             <div className="header-controls">
-                <button onClick={logout}>Log Out</button>
+                <button className="red-btn" onClick={logout}>
+                    Log Out
+                </button>
+                <div className="profile-link"></div>
             </div>
         </div>
     );

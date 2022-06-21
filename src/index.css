@@ -1,4 +1,5 @@
 @import url("https://v1.fontapi.ir/css/SFProDisplay");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 
 :root {
     --orange-theme: #ffbc7d;
@@ -6,6 +7,8 @@
     --red-theme: #ff8c8c;
     --nav-side-border: #dedede 1px solid;
     --stroke-style: #c6c6c6 1px solid;
+
+    --low-gray: #fafafa;
 }
 
 body {
@@ -52,10 +55,18 @@ body {
     height: 38px;
     text-indent: 12px;
     margin-bottom: 8px;
+    transition: 0.15s ease-in-out;
+    font-family: "SF Pro Display", sans-serif;
+    font-weight: 500;
 }
 
 .--form-el input::placeholder {
     color: rgba(0, 0, 0, 0.301);
+}
+
+.--form-el input:focus {
+    background: #e9e9e9;
+    transition: 0.15s ease-in-out;
 }
 
 .-login-page {
@@ -217,4 +228,99 @@ body {
     width: 100px;
     height: 100px;
     cursor: pointer;
+}
+
+.header {
+    display: flex;
+    align-items: center !important;
+    justify-content: space-between;
+    background-color: var(--low-gray);
+    padding-bottom: 5px;
+    padding-left: 8vw;
+    padding-right: 8vw;
+}
+
+.header h1 {
+    font-size: 17px;
+    font-weight: 600;
+    width: 100px;
+}
+
+.header a {
+    text-decoration: none;
+    color: black;
+}
+
+.header input {
+    background-color: #eeeeee;
+    border: none;
+    padding: 8px 8px;
+    /* height: 24px; */
+    width: 250px;
+    outline: none;
+    border-radius: 10px;
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    background-image: url("./assets/search.svg");
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    background-position: 3.4% 43%;
+    text-indent: 22px;
+}
+
+.red-btn {
+    background-color: rgba(255, 74, 61, 0.253);
+    color: red;
+    border: none;
+    border-radius: 100px;
+    padding: 3.5px 12px;
+    font-size: 12px;
+    font-family: "Poppins", sans-serif;
+    cursor: pointer;
+    transition: 0.15s ease-in-out;
+}
+
+.red-btn:hover {
+    opacity: 0.4;
+    transition: 0.15s ease-in-out;
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    column-gap: 6px;
+    width: 100px;
+    /* background-color: red; */
+}
+
+.profile-link {
+    height: 23px;
+    width: 23px;
+    border-radius: 100px;
+    background-image: url("./assets/arnav.jpeg");
+    background-position: center;
+    background-size: 23px 23px;
+    cursor: pointer;
+    transition: 0.15s ease-in-out;
+}
+
+.profile-link:hover {
+    opacity: 0.4;
+    transition: 0.15s ease-in-out;
+}
+
+.checker {
+    display: flex;
+    align-items: center;
+    justify-content: start !important;
+    width: 90%;
+    margin-bottom: 10px;
+}
+
+.checker label {
+    font-size: 13px;
+    font-family: "SF Pro Display", sans-serif;
+    color: #5c5c5c;
+    margin-left: 3.5px;
+    user-select: none;
 }
