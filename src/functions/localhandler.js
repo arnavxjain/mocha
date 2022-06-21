@@ -21,6 +21,21 @@ export const doesUserExist = () => {
 };
 
 export const logout = () => {
+    let memory = localStorage.getItem("memory");
+    // if (memory == "false") {
     localStorage.setItem("user", null);
+    // }
     window.location.pathname = "/login";
+};
+
+export const authStore = (bool) => {
+    localStorage.setItem("memory", bool);
+};
+
+export const authMemoryState = () => {
+    return localStorage.getItem("memory");
+};
+
+export const clearStore = () => {
+    localStorage.clear();
 };

@@ -324,3 +324,18 @@ body {
     margin-left: 3.5px;
     user-select: none;
 }
+
+.header a img {
+    width: 40px;
+}
+
+.loader-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loader-btn img {
+    /* width: 70px; */
+    width: 17px;
+}

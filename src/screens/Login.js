@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import login from "../functions/authentication";
 import ThemedButton from "../components/ThemedButton";
 import GoogleButton from "../components/GoogleButton";
@@ -6,6 +6,7 @@ import { doesUserExist } from "../functions/localhandler";
 
 import darkIcon from "../assets/mocha_icon.svg";
 import { registerWithEP, signInWithEP } from "../console";
+import LoadingButton from "../components/LoadingButton";
 
 export default function Login() {
     const [authState, setAuthState] = useState(0);
@@ -17,6 +18,8 @@ export default function Login() {
     const [fullName, setFullName] = useState("");
 
     const [memory, setMemory] = useState(true);
+
+    const [hitState, setHitState] = useState(false);
 
     if (doesUserExist()) {
         window.location.pathname = "/home";
@@ -39,6 +42,15 @@ export default function Login() {
         }
     }
 
+    const signIn = () => {
+        if (email.trim() == "" || password.trim() == "") {
+            console.log("nuhuh");
+        } else {
+            signInWithEP({email, password, checked: memory});
+            setHitState(true);
+        }
+    }
+
     return (
         <div className="login-page">
         <div className="--form-el author">
@@ -58,15 +70,26 @@ export default function Login() {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                     <div className="checker">
-                        <input type="checkbox" name="" id="rem" />
+                        <input type="checkbox" name="" id="rem" checked={memory} onChange={(e) => setMemory(e.target.checked)}/>
                         <label htmlFor="rem">Remember Me</label>
                     </div>
+                    {/* {
+                        hitState ? (
+                            <LoadingButton />
+                        ) : (
+                            <ThemedButton
+                                className="form-btn"
+                                title="Sign In"
+                                onClick={signIn}
+                            />
+                        )
+                    } */}
                     <ThemedButton
                         className="form-btn"
                         title="Sign In"
-                        onClick={signInWithEP(email, password)}
+                        onClick={signIn}
                     />
-                    <GoogleButton text="Sign In With Google" />
+                    <GoogleButton text="Sign In With Google"/>
                     <hr></hr>
                     <button href="" onClick={() => setAuthState(1)} className="typical-link">
                         Create an account

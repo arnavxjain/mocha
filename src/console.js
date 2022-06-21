@@ -8,6 +8,7 @@ import {
     GoogleAuthProvider,
     signInWithPopup,
     createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
 } from "firebase/auth";
 
 import {
@@ -18,7 +19,7 @@ import {
     where,
     addDoc,
 } from "firebase/firestore/lite";
-import { saveUserByHandler } from "./functions/localhandler";
+import { authStore, saveUserByHandler } from "./functions/localhandler";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAcMKb5jGXN5LwxYEMKCr1jnUunTDxvJec",
@@ -70,7 +71,7 @@ export const signInWithGoogle = async () => {
 
         const q = query(
             collection(db, "users"),
-            where("uid", "==", res.user.uid)
+            where("email", "==", res.user.email)
         );
         const docs = await getDocs(q);
 
@@ -91,8 +92,32 @@ export const signInWithGoogle = async () => {
 
 export const signInWithEP = async (data) => {
     try {
-        const res = await signInWithEP(data.email, data.password);
-        console.log(res);
+        const res = await signInWithEmailAndPassword(
+            auth,
+            data.email,
+            data.password
+        );
+
+        const resReturnedEmail = res.user.email;
+
+        const q = query(
+            collection(db, "users"),
+            where("email", "==", resReturnedEmail)
+        );
+
+        const docs = await getDocs(q);
+
+        docs.docs.map((item) => {
+            console.log(item.data());
+        });
+
+        if (docs.docs.length !== 0) {
+            docs.docs.map((item) => {
+                saveUserByHandler(item.data());
+                authStore(data.checked);
+                window.location.pathname = "/home";
+            });
+        }
     } catch (error) {
         console.error(error);
     }
@@ -121,18 +146,13 @@ export const registerWithEP = async (data) => {
 
         const q = query(
             collection(db, "users"),
-            where("uid", "==", res.user.uid)
+            where("email", "==", data.email)
         );
         const docs = await getDocs(q);
 
         if (docs.docs.length === 0) {
             await addDoc(collection(db, "users"), user);
             saveUserByHandler(user);
-            auth.setPersistence(
-                data.checked
-                    ? auth.Auth.Persistence.LOCAL
-                    : auth.Auth.Persistence.SESSION
-            );
             window.location.pathname = "/home";
         } else {
             console.log("account already exists!");
