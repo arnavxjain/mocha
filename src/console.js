@@ -107,10 +107,6 @@ export const signInWithEP = async (data) => {
 
         const docs = await getDocs(q);
 
-        docs.docs.map((item) => {
-            console.log(item.data());
-        });
-
         if (docs.docs.length !== 0) {
             docs.docs.map((item) => {
                 saveUserByHandler(item.data());
