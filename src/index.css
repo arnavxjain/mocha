@@ -235,7 +235,7 @@ body {
     align-items: center !important;
     justify-content: space-between;
     background-color: var(--low-gray);
-    padding-bottom: 5px;
+    padding-bottom: 8px;
     padding-left: 8vw;
     padding-right: 8vw;
 }

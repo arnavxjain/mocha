@@ -5,7 +5,7 @@ import darkIcon from "../assets/mocha_icon.svg";
 function Header() {
     return (
         <div className="header">
-            <a href="/home">
+            <a href="/home" style={{ width: 100 }}>
                 <img src={darkIcon} alt="icon" />
             </a>
             <input
