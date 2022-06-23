@@ -339,3 +339,25 @@ body {
     /* width: 70px; */
     width: 17px;
 }
+
+.featured {
+    padding: 25px 8vw;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.recs,
+.news {
+    background-color: var(--low-gray);
+    width: 230px;
+    padding: 18px 18px;
+    border-radius: 14px;
+    height: 290px;
+}
+
+.recs h3,
+.news h3 {
+    padding: 0;
+    margin: 0;
+}
