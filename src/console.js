@@ -158,4 +158,6 @@ export const registerWithEP = async (data) => {
     }
 };
 
+export const packetDelivery = () => {};
+
 export { db, auth, storage };
