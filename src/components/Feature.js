@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 function Feature() {
+
+    useEffect(() => {
+        
+    });
+
     return (
-        <div>
-            Feature
+        <div className="feature-main">
+            <h2>Posts</h2>
         </div>
     )
 }

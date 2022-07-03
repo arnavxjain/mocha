@@ -472,7 +472,7 @@ body {
     justify-content: center;
     column-gap: 3px;
     font-family: "Poppins", sans-serif;
-    font-weight: 300;
+    /* font-weight: 600; */
     cursor: pointer;
     transition: 0.35s;
 }
@@ -484,11 +484,12 @@ body {
 
 .colored-btn h4 {
     margin: 0;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 .colored-btn ion-icon {
     font-size: 16px;
+    font-weight: 600;
 }
 
 .attachments {
@@ -500,22 +501,30 @@ body {
 
 .image-outline {
     color: #463f00;
+    transform: translateY(3px);
 }
 
 .document-outline {
     color: #ff5959 !important;
+    transform: translateY(3px);
 }
 
 .link-outline {
     color: #ff9029;
+    transform: translateY(3px);
 }
 
 .newspaper-outline {
-    color: #004e08;
+    color: green;
+    transform: translateY(3px);
 }
 
 @media (max-width: 1090px) {
     .recs {
         display: none;
     }
+}
+
+.feature-main {
+    padding-left: 10px;
 }
